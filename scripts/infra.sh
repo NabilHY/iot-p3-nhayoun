@@ -32,4 +32,4 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 echo "" # Line break for clean terminal formatting
 
 echo "===> Port-forward the API server (Access via https://localhost:8080)"
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+kubectl port-forward --address 0.0.0.0 svc/argocd-server -n argocd 8080:443
