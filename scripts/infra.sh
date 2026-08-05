@@ -24,6 +24,9 @@ kubectl create namespace dev || true
 echo "Deploy ArgoCD :===> [2/6] Apply ArgoCD installation manifests ..."
 kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
+echo "===> Setting ArgoCD reconcile timeout to 10 seconds for fast dev sync ..."
+kubectl patch cm argocd-cm -n argocd --type merge -p '{"data": {"timeout.reconcile": "10s"}}'
+
 echo "===> Waiting for ArgoCD server pod to reach Ready state ..."
 kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=argocd-server -n argocd --timeout=300s
 
