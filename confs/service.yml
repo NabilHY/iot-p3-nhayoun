@@ -4,9 +4,9 @@ metadata:
   name: nhayoun-playground
   namespace: dev
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: nhayoun-playground
-    ports:
-    - port: 8888
-      targetPort: 8888
+  ports:
+    - port: 8885
+      targetPort: 8885
